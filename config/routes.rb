@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
   root "events#index"
 
+  # JSON API endpoints (no authentication required for local use)
+  namespace :api do
+    resources :boards, only: [ :index, :show ] do
+      resources :cards, only: [ :index, :create ]
+    end
+  end
+
   namespace :account do
     resource :cancellation, only: [ :create ]
     resource :entropy
