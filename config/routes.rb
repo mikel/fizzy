@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resources :boards, only: [ :index, :show ] do
       resources :cards, only: [ :index, :create ]
     end
+    resources :cards, only: [ :show, :update ]
   end
 
   namespace :account do
