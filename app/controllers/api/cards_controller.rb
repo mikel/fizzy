@@ -18,16 +18,12 @@ module Api
 
     # POST /api/boards/:board_id/cards
     def create
-      system_user = User.find_by(role: "system") || User.first
-      Current.user = system_user
-      @card = @board.cards.create!(processed_card_params.merge(status: "published", creator: system_user))
+      @card = @board.cards.create!(processed_card_params.merge(status: "published", creator: Current.user))
       render json: card_json(@card), status: :created
     end
 
     # PATCH/PUT /api/cards/:id
     def update
-      system_user = User.find_by(role: "system") || User.first
-      Current.user = system_user
       @card.update!(processed_card_params)
       render json: card_json(@card)
     end
