@@ -359,6 +359,8 @@ GEM
     regexp_parser (2.11.3)
     reline (0.6.3)
       io-console (~> 0.5)
+    reverse_markdown (3.0.2)
+      nokogiri
     rexml (3.4.4)
     rouge (4.7.0)
     rqrcode (3.2.0)
@@ -520,6 +522,7 @@ DEPENDENCIES
   rack-mini-profiler
   rails!
   redcarpet
+  reverse_markdown
   rouge
   rqrcode
   rubocop-rails-omakase
