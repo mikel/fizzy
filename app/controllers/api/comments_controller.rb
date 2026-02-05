@@ -18,11 +18,12 @@ module Api
 
     # POST /api/cards/:card_id/comments
     def create
-      system_user = User.find_by(role: "system") || User.first
-      Current.user = system_user
+      # Use a non-system user to avoid .comment-by-system CSS (which centers text)
+      api_user = User.find_by(role: "user") || User.where.not(role: "system").first || User.first
+      Current.user = api_user
 
       processed_params = process_comment_params
-      @comment = @card.comments.create!(processed_params.merge(creator: system_user))
+      @comment = @card.comments.create!(processed_params.merge(creator: api_user))
       render json: comment_json(@comment), status: :created
     end
 
